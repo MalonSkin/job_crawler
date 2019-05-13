@@ -26,12 +26,12 @@ public class JobProcessor implements PageProcessor {
 
     @Autowired
     private JobPipeline jobPipeline;
-    private String url = "https://search.51job.com/list/000000,000000,0000,00,9,99,java,2,1.html?lang=c&stype=&postchannel=0000&workyear=99&cotype=99&degreefrom=99&jobterm=99&companysize=99&providesalary=99&lonlat=0%2C0&radius=-1&ord_field=0&confirmdate=9&fromType=&dibiaoid=0&address=&line=&specialarea=00&from=&welfare=";
+    private String url = "https://search.51job.com/list/000000,000000,0000,00,1,99,java,2,1.html?lang=c&stype=1&postchannel=0000&workyear=99&cotype=99&degreefrom=99&jobterm=99&companysize=99&lonlat=0%2C0&radius=-1&ord_field=0&confirmdate=9&fromType=5&dibiaoid=0&address=&line=&specialarea=00&from=&welfare=";
     private Site site = Site.me()
             .setCharset("gbk")
-            .setTimeOut(10 * 1000)
-            .setRetrySleepTime(3000)
-            .setRetryTimes(3);
+            .setTimeOut(100 * 1000)
+            .setRetrySleepTime(5000)
+            .setRetryTimes(5);
 
     @Override
     public void process(Page page) {
@@ -85,9 +85,9 @@ public class JobProcessor implements PageProcessor {
 
     /**
      * initialDelay 当任务启动后，等待多久执行方法
-     * fixedDelay 没隔多久执行一次方法
+     * fixedDelay 每隔多久执行一次方法
      */
-    @Scheduled(initialDelay = 1000, fixedDelay = 100 * 1000)
+    @Scheduled(initialDelay = 10000, fixedRate = 24 * 3600 * 1000)
     public void process() {
         Spider.create(new JobProcessor())
                 .addUrl(url)

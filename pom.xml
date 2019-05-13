@@ -12,7 +12,7 @@
     <groupId>com.zhangzz</groupId>
     <artifactId>zhangzz-crawler-job</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <properties>
         <java.version>1.8</java.version>
@@ -33,6 +33,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.6</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -87,16 +88,34 @@
 
     <build>
         <plugins>
-            <plugin>
-                <!--热部署配置-->
+            <!--<plugin>
+                &lt;!&ndash;热部署配置&ndash;&gt;
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <!--fork:如果没有该项配置,整个devtools不会起作用-->
+                    &lt;!&ndash;fork:如果没有该项配置,整个devtools不会起作用&ndash;&gt;
                     <fork>true</fork>
                 </configuration>
+            </plugin>-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+
+        <resources>
+            <resource>
+                <!-- 打包时将jsp文件拷贝到META-INF目录下-->
+                <!-- 指定resources插件处理哪个目录下的资源文件 -->
+                <directory>src/main/webapp</directory>
+                <!--注意此次必须要放在此目录下才能被访问到-->
+                <targetPath>META-INF/resources</targetPath>
+                <includes>
+                    <include>**/**</include>
+                </includes>
+            </resource>
+        </resources>
+
     </build>
 
 </project>
