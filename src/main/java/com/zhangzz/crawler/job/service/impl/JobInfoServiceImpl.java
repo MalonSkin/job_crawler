@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,6 +43,6 @@ public class JobInfoServiceImpl implements JobInfoService {
 
     @Override
     public Page<JobInfo> findByPage(int page, int size) {
-        return jobInfoDAO.findAll(PageRequest.of(page, size));
+        return jobInfoDAO.findAll(PageRequest.of(page, size, new Sort(Sort.Direction.DESC, "id")));
     }
 }

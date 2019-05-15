@@ -87,7 +87,8 @@ public class JobProcessor implements PageProcessor {
      * initialDelay 当任务启动后，等待多久执行方法
      * fixedDelay 每隔多久执行一次方法
      */
-    @Scheduled(initialDelay = 10000, fixedRate = 24 * 3600 * 1000)
+    // @Scheduled(initialDelay = 10000, fixedRate = 24 * 3600 * 1000)
+    @Scheduled(cron = "0 0 2 * * ?")
     public void process() {
         Spider.create(new JobProcessor())
                 .addUrl(url)
